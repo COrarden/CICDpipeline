@@ -1,4 +1,4 @@
-name: CI Pipeline
+name: CI/CD Pipeline
 
 on:
   push:
@@ -28,4 +28,9 @@ jobs:
           echo "def test_hello(): assert app.test_client().get('/').status_code == 200" >> test_app.py
           pip install pytest
           pytest test_app.py
+
+      - name: Deploy with Docker (CD stage)
+        run: |
+          docker build -t flask-cicd-app .
+          echo "Simulated deploy complete — image built successfully"
 
